@@ -28,8 +28,8 @@ namespace :spree do
         tfile.write(yml_xml)
         tfile.close  
         # пакуем в gz и делаем симлинк на ссылку файла yandex_market_last.gz
-        system %{ gzip #{tfile.path} &&
-                  ln -sf #{tfile.path}.gz #{File.join(directory, "yandex_market.gz") } }
+        system(%{ gzip -0 #{tfile.path} &&
+                  ln -sf #{tfile.path}.gz #{File.join(directory, "yandex_market.gz") } })
 
         # Удаляем лишнии файлы
         @config = ::YandexMarketConfiguration.first
