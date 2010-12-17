@@ -18,7 +18,7 @@ class Admin::YandexMarketsController < Admin::BaseController
   def export_files
     directory = File.join(RAILS_ROOT,'public', "yandex_market", '**', '*')
     # нельзя вызывать стат, не удостоверившись в наличии файла!!111
-    @export_files =  Dir[directory].map {|x| [File.basename(x), (File.file?(x) ? File.mtime(x) : 0)] }.
+    @export_files =  Dir[directory].map {|x| [File.basename(x), (File.file?(x) ? File.mtime(x).to_i : 0)] }.
       sort{|x,y| y.last <=> x.last }
     e =@export_files.find {|x| x.first == "yandex_market.gz" }
     @export_files.reject! {|x| x.first == "yandex_market.gz" }
